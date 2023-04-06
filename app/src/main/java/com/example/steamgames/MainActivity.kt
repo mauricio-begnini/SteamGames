@@ -13,6 +13,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -90,17 +91,22 @@ fun GameCard(game: Game) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(
                 modifier = Modifier
-                    .height(45.dp)
-                    .width(120.dp),
+                    //.height(65.dp)
+                    .widthIn(135.dp),
+
                 painter = painterResource(id = game.imageDrawableResId),
                 contentDescription = stringResource(
                     id = game.nameStringResId
-                )
+                ),
+                contentScale = ContentScale.Crop
             )
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Text(text = stringResource(id = game.nameStringResId))
+            Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
                 Text(
-                    modifier = Modifier.align(Alignment.End),
+                    text = stringResource(id = game.nameStringResId)
+                )
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.End),
                     text = stringResource(id = game.priceStringResId),
                     color = if (game.isOnOffer) MaterialTheme.colors.onSecondary else MaterialTheme.colors.onSurface
                 )
